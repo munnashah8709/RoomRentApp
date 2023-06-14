@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './login.css';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
-
   const toggle = () => {
     setIsSignIn(!isSignIn);
   };
@@ -87,10 +87,17 @@ const Login = () => {
 
     const handleNext = (e) => {
       e.preventDefault();
-      if (step < fieldGroups.length) {
+      if (step < 4) {
         setStep((prevStep) => prevStep + 1);
       } else {
         handleSignUp(e);
+      }
+    };
+
+    const handlePrevious = (e) => {
+      e.preventDefault();
+      if (step > 1) {
+        setStep((prevStep) => prevStep - 1);
       }
     };
 
@@ -118,7 +125,7 @@ const Login = () => {
                   />
                   <label htmlFor={field.name}>
                     {field.placeholder}{' '}
-                    {formData[`${field.name}FileName`] && `- ${formData[`${field.name}FileName`]}`}
+                    {formData[`${field.name}FileName`] ? `- ${formData[`${field.name}FileName`]}` : ''}
                   </label>
                 </div>
               </>
@@ -126,11 +133,14 @@ const Login = () => {
               <>
                 <i className="bx bxs-calendar"></i>
                 <DatePicker
-                  selected={formData.dateOfBirth}
-                  onChange={handleDateChange}
-                  placeholderText={field.placeholder}
-                  dateFormat="MM/dd/yyyy"
+               selected={formData.dateOfBirth}
+               onChange={handleDateChange}
+               placeholderText={field.placeholder}
+               dateFormat="MM/dd/yyyy"
+               showYearDropdown
+               showMonthDropdown
                 />
+
               </>
             ) : (
               <>
@@ -146,6 +156,9 @@ const Login = () => {
             )}
           </div>
         ))}
+        <button onClick={handlePrevious} disabled={step === 1}>
+          Previous
+        </button>
         <button onClick={handleNext}>{step < fieldGroups.length ? 'Next' : 'Sign up'}</button>
       </>
     );
@@ -159,6 +172,7 @@ const Login = () => {
             <div className="form sign-up">
               {renderFormFields()}
               <p>
+              <AiOutlineArrowLeft />
                 <span>Already have an account?</span>
                 <b onClick={toggle} className="pointer">
                   Sign in here
