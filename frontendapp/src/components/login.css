@@ -106,6 +106,19 @@ body {
     font-size: 1.2rem;
     outline: none;
 }
+.form button {
+    display: inline-flex; /* Add this line */
+    width: calc(50% - 0.5rem); /* Update this line */
+    margin: 0.25rem;
+    justify-content: center; /* Add this line */
+}
+@media only screen and (max-width: 425px) {
+    .form button {
+        width: 100%;
+        
+    }
+}
+
 
 .form p {
     margin: 1rem 0;
