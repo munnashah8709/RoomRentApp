@@ -58,6 +58,28 @@ const Login = () => {
     }));
   };
 
+  const handleNext = (e) => {
+    e.preventDefault();
+    if (step < 4) {
+      setStep((prevStep) => prevStep + 1);
+    } else {
+      handleSignUp(e);
+    }
+  };
+
+  const handleBack = (e) => {
+    e.preventDefault();
+    if (step > 1) {
+      setStep((prevStep) => prevStep - 1);
+    }
+  };
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    // Perform sign up logic with the form data
+    console.log('Sign Up Data:', formData);
+  };
+
   const renderFormFields = () => {
     const fieldGroups = [
       [
@@ -85,28 +107,6 @@ const Login = () => {
       ]
     ];
 
-    const handleNext = (e) => {
-      e.preventDefault();
-      if (step < 4) {
-        setStep((prevStep) => prevStep + 1);
-      } else {
-        handleSignUp(e);
-      }
-    };
-
-    const handlePrevious = (e) => {
-      e.preventDefault();
-      if (step > 1) {
-        setStep((prevStep) => prevStep - 1);
-      }
-    };
-
-    const handleSignUp = (e) => {
-      e.preventDefault();
-      // Perform sign up logic with the form data
-      console.log('Sign Up Data:', formData);
-    };
-
     const currentGroup = fieldGroups[step - 1] || [];
 
     return (
@@ -133,14 +133,11 @@ const Login = () => {
               <>
                 <i className="bx bxs-calendar"></i>
                 <DatePicker
-               selected={formData.dateOfBirth}
-               onChange={handleDateChange}
-               placeholderText={field.placeholder}
-               dateFormat="MM/dd/yyyy"
-               showYearDropdown
-               showMonthDropdown
+                  selected={formData.dateOfBirth}
+                  onChange={handleDateChange}
+                  placeholderText={field.placeholder}
+                  dateFormat="MM/dd/yyyy"
                 />
-
               </>
             ) : (
               <>
@@ -156,10 +153,23 @@ const Login = () => {
             )}
           </div>
         ))}
-        <button onClick={handlePrevious} disabled={step === 1}>
-          Previous
-        </button>
-        <button onClick={handleNext}>{step < fieldGroups.length ? 'Next' : 'Sign up'}</button>
+        <div className="button-group">
+          {/* {step > 1 && (
+            // <button className="back-button" onClick={handleBack}>
+            //   <AiOutlineArrowLeft />
+            // </button>
+          )} */}
+          {step < fieldGroups.length && (
+            <button className="next-button" onClick={handleNext}>
+              Next
+            </button>
+          )}
+          {step === fieldGroups.length && (
+            <button className="sign-up-button" onClick={handleSignUp}>
+              Sign up
+            </button>
+          )}
+        </div>
       </>
     );
   };
@@ -172,7 +182,11 @@ const Login = () => {
             <div className="form sign-up">
               {renderFormFields()}
               <p>
-              <AiOutlineArrowLeft />
+                {step > 1 && (
+                  <button className="back-icon" onClick={handleBack}>
+                    <AiOutlineArrowLeft />
+                  </button>
+                )}
                 <span>Already have an account?</span>
                 <b onClick={toggle} className="pointer">
                   Sign in here
@@ -203,21 +217,6 @@ const Login = () => {
                 </b>
               </p>
             </div>
-          </div>
-          <div className="form-wrapper"></div>
-        </div>
-      </div>
-      <div className="row content-row">
-        <div className="col align-items-center flex-col">
-          <div className="text sign-in">
-            <h2>Welcome</h2>
-          </div>
-          <div className="img sign-in"></div>
-        </div>
-        <div className="col align-items-center flex-col">
-          <div className="img sign-up"></div>
-          <div className="text sign-up">
-            <h2>Join with us</h2>
           </div>
         </div>
       </div>
