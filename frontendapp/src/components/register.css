@@ -1,0 +1,129 @@
+body{
+  margin: 0%;
+}
+
+.div2{
+height: 741px;
+width: 50%;
+/* background-image: url('https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'); */
+border-top-left-radius: max(50vw, 50vh);
+background-color: rgb(98, 0, 255);
+/* background-repeat: repeat-x; */
+}
+/* .imagelog{
+  width: 100%;
+  border-bottom-right-radius: max(50vw, 50vh);
+
+} */
+
+body{
+  margin: 0%;
+}
+
+.div1{
+height: 741px;
+width: 50%;
+/* background-image: url('https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'); */
+border-bottom-right-radius: max(50vw, 50vh);
+background-color: aqua;
+/* background-repeat: repeat-x; */
+}
+/* .imagelog{
+  width: 100%;
+  border-bottom-right-radius: max(50vw, 50vh);
+
+} */
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,500;0,600;0,700;1,100;1,200;1,300&display=swap');
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: "Poppins", sans-serif;
+
+}
+body{
+  background: #6a62d2;
+}
+
+.login-page {
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.form1 {
+position: relative;
+filter:drop-shadow(0 0 2px #000000);
+border-radius: 5px;
+width: 360px;
+height: 5px;
+background-color: #ffffff;
+padding:40px;
+}
+
+.form1 img {
+  position: absolute;
+  height: 20px;
+  top: 230px;
+  right: 60px;
+  cursor: pointer;
+}
+
+.form1 input {
+  outline: 0;
+  background: #f2f2f2;
+  border-radius: 4px;
+  width: 100%;
+  border: 0;
+  margin: 15px 0;
+  padding: 15px;
+  font-size: 14px;
+}
+
+.form1 input:focus {
+  box-shadow: 0 0 5px 0 rgba(106, 98, 210);
+}
+
+span {
+  color: red;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.form1 button {
+  outline: 0;
+  background: #6a62d2;
+  width: 100%;
+  border: 0;
+  margin-top: 10px;
+  border-radius: 3px;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 15px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.4s ease-in-out;
+  cursor: pointer;
+}
+
+.form1 button:hover,
+.form1 button:active,
+.form1 button:focus {
+  background: black;
+  color: #fff;
+
+}
+
+.message{
+  margin: 15px 0;
+  text-align: center;
+
+}
+.form1 .message a {
+  font-size: 14px;
+  color: #6a62d2;
+  text-decoration: none;
+}
