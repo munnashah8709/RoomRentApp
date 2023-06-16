@@ -1,274 +1,156 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag } from '@fortawesome/free-solid-svg-icons';
-import Navbar from "./Navbar";
-import Footer from "./Footer";
-import "./register.css"
+import React, { useState } from 'react'
+import './register.css';
+import { useNavigate } from 'react-router-dom';
 
-
-
-const Register = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    contact: '',
-    dateOfBirth: '',
-    alternatePhone: '',
-    fatherName: '',
-    motherName: '',
-    panNumber: '',
-    panImage: null,
-    voterCardImage: null,
-    aadharNumber: '',
-    aadharImage: null,
-    profilePic: null
-  });
-
-  const [errors, setErrors] = useState({});
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
-
-  const handleFileChange = (e) => {
-    const { name, files } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: files[0]
-    }));
-  };
+function Register() {
+  const navigate=useNavigate();
+  const [registerdata, setregisterdata]=useState({})
+  const handleUsernameChange=(e)=>{
+     const Name=e.target.name;
+     const Value=e.target.value
+     setregisterdata({...registerdata, [Name]:Value})
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Perform form validation
-    const validationErrors = {};
-    if (!formData.username) {
-      validationErrors.username = 'Username is required';
-    }
-    if (!formData.email) {
-      validationErrors.email = 'Email is required';
-    }
-    // Add more validation checks here for other fields
-
-    // If there are validation errors, set the errors state
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-    } else {
-      // No validation errors, proceed with form submission
-      // You can access the form data in the formData state object
-      console.log(formData);
-      // Reset form data
-      setFormData({
-        username: '',
-        email: '',
-        password: '',
-        contact: '',
-        dateOfBirth: '',
-        alternatePhone: '',
-        fatherName: '',
-        motherName: '',
-        panNumber: '',
-        panImage: null,
-        voterCardImage: null,
-        aadharNumber: '',
-        aadharImage: null,
-        profilePic: null
-      });
-      // Reset errors
-      setErrors({});
-    }
+    console.log(registerdata)
   };
 
-  return (<>
-    <Navbar />
-    <div className="registration-form-container">
-      
-      <h2>Registration Form</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
+
+
+  const handelRoute=()=>{
+    navigate("/")
+  }
+  return (
+    <div className="row" style={{display:"flex"}}>
+    <div className="col" style={{ width: '50%'}}>
+    <div className="login-page">
+      <div className="form1">
+        <form className="login-form" onSubmit={handleSubmit}>
+         <div className='row' style={{display:"flex"}}>
+           <div className='col-6' style={{ width: '50%'}} >
+           <input
+            type="text" required  placeholder="Username"
+            name='UserName'
+            onChange={handleUsernameChange}
+            autoComplete="off"
+          />
+           </div>
+
+           <div className='col-6' style={{ width: '50%',marginLeft:"10px"}}>
           <input
             type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
+            required
+            placeholder="Father Name"
+             name='FatherName'
+            onChange={handleUsernameChange}
+            autoComplete="off"
           />
-          {errors.username && <span className="error">{errors.username}</span>}
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
+           </div>
+         </div>
+
+         <div className='row' style={{display:"flex"}}>
+           <div className='col-6' style={{ width: '50%'}} >
+           <input
+            type="text" required  placeholder="Mother Name"
+            name='MotherName'
+            onChange={handleUsernameChange}
+            autoComplete="off"
+          />
+           </div>
+
+           <div className='col-6' style={{ width: '50%',marginLeft:"10px"}}>
           <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
+            type="number"
+            required
+            placeholder="Phone Number"
+            name='PhoneNumber'
+            onChange={handleUsernameChange}
+            autoComplete="off"
           />
-          {errors.email && <span className="error">{errors.email}</span>}
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
+           </div>
+         </div>
+         <div className='row' style={{display:"flex"}}>
+           <div className='col-6' style={{ width: '50%'}} >
+           <input
+            type="email" required  placeholder="Email"
+            name='email'
+            onChange={handleUsernameChange}
+            autoComplete="off"
+          />
+           </div>
+
+           <div className='col-6' style={{ width: '50%',marginLeft:"10px"}}>
           <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
+            type="date"
+            required
+            placeholder="Date Of Birth"
+            name='DOB'
+            onChange={handleUsernameChange}
+            autoComplete="off"
           />
-        </div>
-        <div className="form-group">
-  <label htmlFor="contact">Contact</label>
-  <div className="contact-input-container">
-    <select
-      id="countryCode"
-      name="countryCode"
-      value={formData.countryCode}
-      onChange={handleChange}
-      required
-    >
-      <option value="+91">
-  <FontAwesomeIcon icon={faFlag} className="flag-icon" />
-  +91 (India)
-</option>
+           </div>
+         </div>
 
+         <div className='row' style={{display:"flex"}}>
+           <div className='col-6' style={{ width: '50%'}} >
+           <input
+            type="text" required  placeholder="Password"
+            name='Password'
+            onChange={handleUsernameChange}
+            autoComplete="off"
+          />
+           </div>
 
-      
-    </select>
-    <input
-      type="tel"
-      id="contact"
-      name="contact"
-      value={formData.contact}
-      onChange={handleChange}
-      placeholder="Enter your contact number"
-      required
-    />
-  </div>
-</div>
-
-
-<div className="form-group">
-  <label htmlFor="dateOfBirth">Date of Birth</label>
-  <DatePicker
-    id="dateOfBirth"
-    name="dateOfBirth"
-    selected={selectedDate}
-    onChange={(date) => setSelectedDate(date)}
-    dateFormat="dd/MM/yyyy"
-    placeholderText="Select your date of birth"
-    required
-  />
-</div>
-
-        <div className="form-group">
-  <label htmlFor="alternatePhone">Alternate Number</label>
-  <input
-    type="tel"
-    id="alternatePhone"
-    name="alternatePhone"
-    value={formData.alternatePhone}
-    onChange={handleChange}
-    placeholder="Enter your phone number"
-    required
-  />
-</div>
-
-        <div className="form-group">
-          <label htmlFor="fatherName">Father's Name</label>
+           <div className='col-6' style={{ width: '50%',marginLeft:"10px"}}>
           <input
             type="text"
-            id="fatherName"
-            name="fatherName"
-            value={formData.fatherName}
-            onChange={handleChange}
+            required
+            placeholder="Conform Password"
+            name='ConformPassword'
+            onChange={handleUsernameChange}
+            autoComplete="off"
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="motherName">Mother's Name</label>
-          <input
-            type="text"
-            id="motherName"
-            name="motherName"
-            value={formData.motherName}
-            onChange={handleChange}
+           </div>
+         </div>
+         <div className='row' style={{display:"flex"}}>
+           <div className='col-6' style={{ width: '50%'}} >
+           <input
+            type="text" required  placeholder="Pan Number"
+             name='PanNumber'
+            onChange={handleUsernameChange}
+            autoComplete="off"
           />
-        </div>
-        <div className="form-group">
-  <label htmlFor="panNumber">PAN Number</label>
-  <input
-    type="text"
-    id="panNumber"
-    name="panNumber"
-    value={formData.panNumber}
-    onChange={handleChange}
-    placeholder="Enter your PAN number"
-    required
-  />
-</div>
+           </div>
 
-        <div className="form-group">
-          <label htmlFor="panImage">Pan Image</label>
-          <input
-            type="file"
-            id="panImage"
-            name="panImage"
-            onChange={handleFileChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="voterCardImage">Voter Card Image</label>
-          <input
-            type="file"
-            id="voterCardImage"
-            name="voterCardImage"
-            onChange={handleFileChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="aadharNumber">Aadhar Number</label>
+           <div className='col-6' style={{ width: '50%',marginLeft:"10px"}}>
           <input
             type="text"
-            id="aadharNumber"
-            name="aadharNumber"
-            value={formData.aadharNumber}
-            onChange={handleChange}
+            required
+            placeholder="Aadhar"
+            name='AadharNumber'
+            onChange={handleUsernameChange}
+            autoComplete="off"
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="aadharImage">Aadhar Image</label>
-          <input
-            type="file"
-            id="aadharImage"
-            name="aadharImage"
-            onChange={handleFileChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="profilePic">Profile Picture</label>
-          <input
-            type="file"
-            id="profilePic"
-            name="profilePic"
-            onChange={handleFileChange}
-          />
-        </div>
-        <button type="submit">Register</button>
-      </form>
-      
+           </div>
+         </div>
+
+        
+  
+          <button type="submit">SIGN UP</button>
+          <p className="message" onClick={handelRoute}>Allerdy Have An Acount</p>
+        </form>
+      </div>
     </div>
-    <Footer />
-    </>
-  );
-};
+    </div>
 
-export default Register;
 
+    <div className="col div2">
+    {/* <img className='imagelog' src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Image Description" />  */}
+    <h1 style={{color:"white", textAlign:"center", marginTop:"350px"}}>Register Here To Explore More</h1>
+    </div>
+    </div>
+  )
+}
+
+export default Register
