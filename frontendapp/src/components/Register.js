@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 function Register() {
   const navigate=useNavigate();
-
   const [registerdata, setregisterdata]=useState({})
   const handleUsernameChange=(e)=>{
      const Name=e.target.name;

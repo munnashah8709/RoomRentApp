@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import 'react-datepicker/dist/react-datepicker.css';
 import './login.css';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-
   const navigate=useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -42,8 +40,6 @@ const Login = () => {
   }
   return(
     <div className="row" style={{display:"flex"}}>
-
-
     <div className="col div1">
     {/* <img className='imagelog' src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Image Description" />  */}
     <h1 style={{color:"white"}}>Wellcome to Home page</h1>
@@ -85,9 +81,6 @@ const Login = () => {
       </div>
     </div>
     </div>
-
-
-
   </div>
   )
 };
