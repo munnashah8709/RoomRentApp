@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import './register.css';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 function Register() {
   const navigate=useNavigate();
+
 
   const [registerdata, setregisterdata]=useState({})
   const handleUsernameChange=(e)=>{
@@ -11,10 +13,40 @@ function Register() {
      const Value=e.target.value
      setregisterdata({...registerdata, [Name]:Value})
   }
+  
+  const formdata1 = new FormData();
+  formdata1.append("username", registerdata.UserName);
+  formdata1.append("email", registerdata.email);
+  formdata1.append("contact", registerdata.PhoneNumber);
+  formdata1.append("password", registerdata.password);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(registerdata)
+   
+    if(registerdata.Password!==registerdata.ConformPassword){
+      console.log("error")
+    }else{
+
+      axios
+      .post("http://localhost:8000/register", formdata1, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formdata1),
+      })
+      .then((data) => {
+        if (data.error) {
+          alert(data.error);
+        } else {
+          alert("Registered Successfull");
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+
   };
 
 
@@ -28,40 +60,24 @@ function Register() {
     <div className="login-page">
       <div className="form1">
         <form className="login-form" onSubmit={handleSubmit}>
-         <div className='row' style={{display:"flex"}}>
-           <div className='col-6' style={{ width: '50%'}} >
+
+
+         
            <input
             type="text" required  placeholder="Username"
             name='UserName'
             onChange={handleUsernameChange}
             autoComplete="off"
           />
-           </div>
-
-           <div className='col-6' style={{ width: '50%',marginLeft:"10px"}}>
-          <input
-            type="text"
-            required
-            placeholder="Father Name"
-             name='FatherName'
-            onChange={handleUsernameChange}
-            autoComplete="off"
-          />
-           </div>
-         </div>
-
-         <div className='row' style={{display:"flex"}}>
-           <div className='col-6' style={{ width: '50%'}} >
+        
            <input
-            type="text" required  placeholder="Mother Name"
-            name='MotherName'
+            type="email" required  placeholder="Email"
+            name='email'
             onChange={handleUsernameChange}
             autoComplete="off"
           />
-           </div>
 
-           <div className='col-6' style={{ width: '50%',marginLeft:"10px"}}>
-          <input
+            <input
             type="number"
             required
             placeholder="Phone Number"
@@ -69,75 +85,21 @@ function Register() {
             onChange={handleUsernameChange}
             autoComplete="off"
           />
-           </div>
-         </div>
-         <div className='row' style={{display:"flex"}}>
-           <div className='col-6' style={{ width: '50%'}} >
-           <input
-            type="email" required  placeholder="Email"
-            name='email'
-            onChange={handleUsernameChange}
-            autoComplete="off"
-          />
-           </div>
 
-           <div className='col-6' style={{ width: '50%',marginLeft:"10px"}}>
           <input
-            type="date"
-            required
-            placeholder="Date Of Birth"
-            name='DOB'
-            onChange={handleUsernameChange}
-            autoComplete="off"
-          />
-           </div>
-         </div>
-
-         <div className='row' style={{display:"flex"}}>
-           <div className='col-6' style={{ width: '50%'}} >
-           <input
             type="text" required  placeholder="Password"
             name='Password'
             onChange={handleUsernameChange}
             autoComplete="off"
           />
-           </div>
 
-           <div className='col-6' style={{ width: '50%',marginLeft:"10px"}}>
-          <input
-            type="text"
-            required
-            placeholder="Conform Password"
+           <input
+            type="text" required  placeholder="ConformPassword"
             name='ConformPassword'
             onChange={handleUsernameChange}
             autoComplete="off"
           />
-           </div>
-         </div>
-         <div className='row' style={{display:"flex"}}>
-           <div className='col-6' style={{ width: '50%'}} >
-           <input
-            type="text" required  placeholder="Pan Number"
-             name='PanNumber'
-            onChange={handleUsernameChange}
-            autoComplete="off"
-          />
-           </div>
-
-           <div className='col-6' style={{ width: '50%',marginLeft:"10px"}}>
-          <input
-            type="text"
-            required
-            placeholder="Aadhar"
-            name='AadharNumber'
-            onChange={handleUsernameChange}
-            autoComplete="off"
-          />
-           </div>
-         </div>
-
         
-  
           <button type="submit">SIGN UP</button>
           <p className="message" onClick={handelRoute}>Allerdy Have An Acount</p>
         </form>
