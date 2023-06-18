@@ -3,7 +3,6 @@ import './login.css';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-
   const navigate=useNavigate();
   const [loginData, setlogindata]=useState({})
   
@@ -111,9 +110,6 @@ const Login = () => {
       </div>
     </div>
     </div>
-
-
-
   </div>
   )
 };

@@ -9,6 +9,7 @@ const Routings = () => {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Login />} />
+
           <Route path='/registration' element={<Register />} />
         </Routes>
       </BrowserRouter>
