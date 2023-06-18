@@ -16,6 +16,10 @@ background-color: rgb(98, 0, 255);
 
 } */
 
+
+
+
+
 body{
   margin: 0%;
 }
@@ -59,8 +63,8 @@ body{
 position: relative;
 filter:drop-shadow(0 0 2px #000000);
 border-radius: 5px;
-width: 360px;
-height: 5px;
+width: 450px;
+height: 546px;
 background-color: #ffffff;
 padding:40px;
 }
